@@ -1,0 +1,9 @@
+node_modules
+build
+dist
+.tmp
+coverage
+screenshots
+docs
+app/generated-src/*.js
+*~

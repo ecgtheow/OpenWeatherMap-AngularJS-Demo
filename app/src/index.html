@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <title>
+      24 Hour Weather Forecast
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="24 hour weather forecast from OpenWeatherMap.org">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/app.css">
+  </head>
+  <body ng-app="openWeatherMapApp" ng-cloak>
+    <div ng-controller="ForecastListController as flc">
+      <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+          <div class="navbar-header">
+            <div class="navbar-brand">
+              24 Hour Weather Forecast
+            </div>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown" uib-dropdown>
+              <a href="#"
+                 class="dropdown-toggle"
+                 data-toggle="dropdown"
+                 role="button"
+                 aria-haspopup="true"
+                 aria-expanded="false"
+                 uib-dropdown-toggle>
+                <span class="glyphicon glyphicon-cog"></span>
+              </a>
+              <ul class="dropdown-menu"
+                  role="menu">
+                <li ng-class="{active: flc.unit () === 'C'}">
+                  <a ng-click="flc.setUnit ('C')">&#8451;</a>
+                </li>
+                <li ng-class="{active: flc.unit () === 'F'}">
+                  <a ng-click="flc.setUnit ('F')">&#8457;</a>
+                </li>
+                <li ng-class="{active: flc.unit () === 'K'}">
+                  <a ng-click="flc.setUnit ('K')">&#176;K</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="row extra-margin-bottom">
+          <div class="col-xs-1">
+          </div>
+          <div class="col-xs-10">
+            <div class="input-group">
+              <input type="text"
+                     placeholder="Search a city"
+                     ng-model="flc.searchItem"
+                     uib-typeahead="city for city in flc.cityNames | filter:$viewValue | limitTo:8"
+                     class="form-control">
+              <span class="input-group-btn">
+                <button type="button"
+                        class="btn btn-primary"
+                        ng-click="flc.getForecast ()"
+                        ng-disabled="!flc.searchItem">
+                  <span class="glyphicon glyphicon-search"></span> Search
+                </button>
+              </span>
+            </div>
+          </div>
+          <div class="col-xs-1">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <table class="forecast-table table table-striped table-condensed">
+              <thead>
+                <tr>
+                  <th>City</th>
+                  <th ng-repeat="timestamp in flc.displayTimes">
+                    {{flc.displayTime(timestamp)}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="forecast in flc.retrieved">
+                  <td>{{flc.forecastCity (forecast)}}</td>
+                  <td ng-repeat="timestamp in flc.displayTimes">
+                    <forecast-detail forecast="flc.forecastDetail (forecast, timestamp)">
+                    </forecast-detail>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--[if lt IE 9]>
+    <script src="scripts/ie-shims.js"></script
+    <![endif]-->
+
+    <script src="scripts/vendor.js"></script>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>

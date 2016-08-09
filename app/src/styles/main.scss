@@ -1,0 +1,40 @@
+$icon-font-path: '/assets/bootstrap-sass/assets/fonts/bootstrap/';
+
+@import 'bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import 'bootstrap-sass/assets/stylesheets/bootstrap/_panels.scss';
+
+$headingFontSize: 14pt;
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng.ng-cloak {
+  display: none !important;
+}
+
+[ng-click] {
+  cursor: pointer;
+}
+
+// Space out content a bit
+body {
+  padding-bottom: 20px;
+}
+
+
+// Responsive: Portrait tablets and up
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+
+.row.extra-margin-bottom {
+  margin-bottom: 5em;
+}
+
+.forecast-table > tbody > tr > td {
+  vertical-align: middle;
+}

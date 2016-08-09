@@ -1,0 +1,14 @@
+<div>
+  <div ng-if="fdc.forecast">
+    <div class="row">
+      <img ng-src="{{fdc.weatherIcon ()}}">
+    </div>
+    <div class="row">
+      <!-- fdc.temperature () returns the unit as an XML entity -->
+      <div ng-bind-html="fdc.temperature ()"> </div>
+    </div>
+    <div class="row">
+      {{fdc.weatherDescription ()}}
+    </div>
+  </div>
+</div>
