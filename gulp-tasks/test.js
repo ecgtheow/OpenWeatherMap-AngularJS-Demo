@@ -30,7 +30,8 @@ function testApp (done) {
   }).start ();
 }
 
-gulp.task ('test:app', gulp.series (testApp,
+gulp.task ('test:app', gulp.series ('compile:app:devel',
+                                    testApp,
                                     function testAppRemapCoverage () {
                                       return utils.remapCoverage ('coverage-compiled.json');
                                     },
@@ -38,4 +39,6 @@ gulp.task ('test:app', gulp.series (testApp,
                                       utils.reportCoverage (done);
                                     }));
 
-gulp.task ('test', gulp.series ('test:app'));
+gulp.task ('test', gulp.series ('compile:app:devel:ieshims',
+                                'compile:app:devel:vendor',
+                                'test:app'));

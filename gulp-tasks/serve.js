@@ -79,7 +79,6 @@ function watcher (done) {
     queue: true
   }, gulp.series ('lint:app',
                   'lint:app:test',
-                  'compile:app:devel',
                   'test:app'))
     .on ('error', function () {
     });
