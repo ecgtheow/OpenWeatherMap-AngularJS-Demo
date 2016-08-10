@@ -13,16 +13,18 @@
   </head>
   <body ng-app="openWeatherMapApp" ng-cloak>
     <div ng-controller="ForecastListController as flc">
-      <nav class="navbar navbar-default navbar-static-top">
+      <nav id="navbar"
+           class="navbar navbar-default navbar-static-top">
         <div class="container">
-          <div class="navbar-header">
+          <div class="navbar-header navbar-left">
             <div class="navbar-brand">
               24 Hour Weather Forecast
             </div>
           </div>
 
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown" uib-dropdown>
+            <li id="settings-dropdown"
+                class="dropdown" uib-dropdown>
               <a href="#"
                  class="dropdown-toggle"
                  data-toggle="dropdown"
@@ -34,13 +36,16 @@
               </a>
               <ul class="dropdown-menu"
                   role="menu">
-                <li ng-class="{active: flc.unit () === 'C'}">
+                <li id="settings-C"
+                    ng-class="{active: flc.unit () === 'C'}">
                   <a ng-click="flc.setUnit ('C')">&#8451;</a>
                 </li>
-                <li ng-class="{active: flc.unit () === 'F'}">
+                <li id="settings-F"
+                    ng-class="{active: flc.unit () === 'F'}">
                   <a ng-click="flc.setUnit ('F')">&#8457;</a>
                 </li>
-                <li ng-class="{active: flc.unit () === 'K'}">
+                <li id="settings-K"
+                    ng-class="{active: flc.unit () === 'K'}">
                   <a ng-click="flc.setUnit ('K')">&#176;K</a>
                 </li>
               </ul>
@@ -55,13 +60,19 @@
           </div>
           <div class="col-xs-10">
             <div class="input-group">
-              <input type="text"
+              <label for="city-input"
+                     class="sr-only">
+                Search a city
+              </label>
+              <input id="city-input"
+                     type="text"
                      placeholder="Search a city"
                      ng-model="flc.searchItem"
                      uib-typeahead="city for city in flc.cityNames | filter:$viewValue | limitTo:8"
                      class="form-control">
               <span class="input-group-btn">
-                <button type="button"
+                <button id="search-button"
+                        type="button"
                         class="btn btn-primary"
                         ng-click="flc.getForecast ()"
                         ng-disabled="!flc.searchItem">

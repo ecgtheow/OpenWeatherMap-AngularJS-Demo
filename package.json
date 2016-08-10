@@ -25,6 +25,7 @@
     "browser-sync": "^2.14.0",
     "browserify": "^13.1.0",
     "del": "^2.2.1",
+    "fs-extra": "^0.30.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-clean-css": "^2.0.12",
