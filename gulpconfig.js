@@ -13,7 +13,7 @@ config.rootDir = __dirname;
 config.glpPattern = ['gulp-*', 'uglify-save-license', 'del'];
 config.seleniumVersions = {
   selenium: '2.53.1',
-  chrome: '2.22',
+  chrome: '2.21',
   gecko: '0.9.0'
 };
 config.serverPorts = {
@@ -54,8 +54,7 @@ config.srcDirs = {
   app: path.join (config.rootDir, 'app', 'src'),
   appGenerated: path.join (config.rootDir, 'app', 'generated-src'),
   appScripts: path.join (config.rootDir, 'app', 'src', 'scripts'),
-  appTest: path.join (config.rootDir, 'app', 'test'),
-  appE2EHelpers: path.join (config.rootDir, 'app', 'e2e-helpers')
+  appTest: path.join (config.rootDir, 'app', 'test')
 };
 config.destDirs = {
   build: path.join (config.rootDir, 'build'),
@@ -80,8 +79,9 @@ config.appFiles = {
     path.join (config.srcDirs.appTest, 'spec', '**', '*.js')
   ],
   appE2EJS: [
-    path.join (config.srcDirs.appTest, '**', 'e2e', '**', '*.js'),
-    path.join (config.srcDirs.appE2EHelpers, '**', '*.js')
+    path.join (config.srcDirs.appTest, 'e2e', '**', '*.js'),
+    path.join (config.srcDirs.appTest, 'e2e-pageobjects', '**', '*.js'),
+    path.join (config.srcDirs.appTest, 'e2e-helpers', '**', '*.js')
   ],
   appHTML: [
     path.join (config.srcDirs.app, 'views', '*.html')

@@ -84,6 +84,15 @@ function watcher (done) {
     });
 
   gulp.watch ([
+    config.appFiles.appE2EJS
+  ], {
+    delay: 2000,
+    queue: true
+  }, gulp.series ('lint:app:e2e'))
+    .on ('error', function () {
+    });
+
+  gulp.watch ([
     path.join (config.rootDir, 'package.json')
   ], {
     delay: 2000,

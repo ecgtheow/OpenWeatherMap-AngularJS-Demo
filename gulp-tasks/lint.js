@@ -65,6 +65,24 @@ gulp.task ('jscs:app:test', function () {
     .pipe ($.jscs.reporter ('fail'));
 });
 
+gulp.task ('jshint:app:e2e', function () {
+  return gulp.src (config.appFiles.appE2EJS)
+    .pipe ($.jshint.extract ('auto'))
+    .pipe ($.jshint (path.join (config.srcDirs.appTest, '.jshintrc')))
+    .pipe ($.jshint.reporter ('jshint-stylish'))
+    .pipe ($.jshint.reporter ('fail'))
+    .pipe ($.size ({
+      title: 'App e2e test files: '
+    }));
+});
+
+gulp.task ('jscs:app:e2e', function () {
+  return gulp.src (config.appFiles.appE2EJS)
+    .pipe ($.jscs ())
+    .pipe ($.jscs.reporter ())
+    .pipe ($.jscs.reporter ('fail'));
+});
+
 gulp.task ('jshint:gulp', function () {
   return gulp.src (_.flatten ([config.appFiles.gulpJS]))
     .pipe ($.jshint (path.join (config.rootDir, '.jshintrc')))
@@ -84,10 +102,12 @@ gulp.task ('jscs:gulp', function () {
 
 gulp.task ('jshint', gulp.parallel ('jshint:app',
                                     'jshint:app:test',
+                                    'jshint:app:e2e',
                                     'jshint:gulp'));
 
 gulp.task ('jscs', gulp.parallel ('jscs:app',
                                   'jscs:app:test',
+                                  'jscs:app:e2e',
                                   'jscs:gulp'));
 
 gulp.task ('lint', gulp.parallel ('jshint',
@@ -100,6 +120,9 @@ gulp.task ('lint:app:styles', gulp.parallel ('sass-lint:app'));
 
 gulp.task ('lint:app:test', gulp.parallel ('jshint:app:test',
                                            'jscs:app:test'));
+
+gulp.task ('lint:app:e2e', gulp.parallel ('jshint:app:e2e',
+                                          'jscs:app:e2e'));
 
 gulp.task ('lint:gulp', gulp.parallel ('jshint:gulp',
                                        'jscs:gulp'));
