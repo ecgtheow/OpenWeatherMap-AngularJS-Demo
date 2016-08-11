@@ -2,6 +2,14 @@
 
 var angular = require ('angular');
 
+/**
+ * @ngdoc service
+ * @name openWeatherMapApp.service:OpenWeatherMap
+ *
+ * @description
+ *  Uses the public OpenWeatherMap API to retrieve weather forecasts
+ *  by either city ID if known, or city name otherwise.
+ */
 angular.module ('openWeatherMapApp')
   .factory ('OpenWeatherMap', function ($http, $q, $window) {
     var baseUrl = 'http://api.openweathermap.org/data/2.5/forecast';
@@ -13,6 +21,19 @@ angular.module ('openWeatherMapApp')
      */
     var appID = '&APPID=7160330ee849b71305f95fccc10a73ad';
 
+    /**
+     * @ngdoc method
+     * @name forecast5DayByName
+     * @methodOf openWeatherMapApp.service:OpenWeatherMap
+     *
+     * @description
+     *  Retrieves a 5-day weather forecast
+     *
+     * @param {string} name The name of a city to use to retrieve a forecast.
+     *
+     * @returns {promise} A promise that will be resolved with the
+     * forecast data.
+     */
     function forecast5DayByName (name) {
       /* Encode any special characters */
       var url = baseUrl + '?q=' + $window.encodeURIComponent (name) + appID;
@@ -31,6 +52,19 @@ angular.module ('openWeatherMapApp')
       });
     }
 
+    /**
+     * @ngdoc method
+     * @name forecast5DayById
+     * @methodOf openWeatherMapApp.service:OpenWeatherMap
+     *
+     * @description
+     *  Retrieves a 5-day weather forecast
+     *
+     * @param {number} id The ID of a city to use to retrieve a forecast.
+     *
+     * @returns {promise} A promise that will be resolved with the
+     * forecast data.
+     */
     function forecast5DayById (id) {
       /* Check that id is a numeric value */
       if (Number.isNaN (Number (id))) {

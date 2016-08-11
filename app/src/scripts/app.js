@@ -9,6 +9,13 @@ require ('angular-ui-bootstrap');
 
 require ('templates');
 
+/**
+ * @ngdoc overview
+ * @name openWeatherMapApp
+ *
+ * @description
+ *  The main app module
+ */
 angular
   .module ('openWeatherMapApp', [
     'openWeatherMapApp.Templates',

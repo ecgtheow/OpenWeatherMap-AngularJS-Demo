@@ -2,10 +2,30 @@
 
 var angular = require ('angular');
 
+/**
+ * @ngdoc controller
+ * @name openWeatherMapApp.controller:ForecastDetailController
+ *
+ * @description
+ *  This implements the API of the {@link
+ *  openWeatherMapApp.directive:forecastDetail `<forecast-detail/>`}
+ *  directive.
+ */
 angular.module ('openWeatherMapApp')
   .controller ('ForecastDetailController', function (Settings) {
     var self = this;
 
+    /**
+     * @ngdoc method
+     * @name weatherIcon
+     * @methodOf openWeatherMapApp.controller:ForecastDetailController
+     *
+     * @description
+     *  Returns the URL of a weather icon to display.
+     *
+     * @returns {string} The URL of a weather icon to display, or an empty
+     * string if not known.
+     */
     self.weatherIcon = function () {
       if (self.forecast &&
           self.forecast.weather &&
@@ -16,6 +36,17 @@ angular.module ('openWeatherMapApp')
       }
     };
 
+    /**
+     * @ngdoc method
+     * @name weatherDescription
+     * @methodOf openWeatherMapApp.controller:ForecastDetailController
+     *
+     * @description
+     *  Returns a short summary of the weather forecast.
+     *
+     * @returns {string} The summary of a weather forecast, or an empty
+     * string if not known.
+     */
     self.weatherDescription = function () {
       if (self.forecast &&
           self.forecast.weather &&
@@ -26,6 +57,18 @@ angular.module ('openWeatherMapApp')
       }
     };
 
+    /**
+     * @ngdoc method
+     * @name temperature
+     * @methodOf openWeatherMapApp.controller:ForecastDetailController
+     *
+     * @description
+     *  Returns a temperature, in the units specified by the {@link
+     *  openWeatherMapApp.service:Settings Settings} service.
+     *
+     * @returns {string} The temperature forecast, or an empty string
+     * if not known.
+     */
     self.temperature = function () {
       if (self.forecast &&
           self.forecast.main &&
@@ -51,6 +94,17 @@ angular.module ('openWeatherMapApp')
       }
     };
 
+    /**
+     * @ngdoc method
+     * @name rain
+     * @methodOf openWeatherMapApp.controller:ForecastDetailController
+     *
+     * @description
+     *  Returns the amount of rain expected by a weather forecast.
+     *
+     * @returns {string} The amount of rain forecast, or an empty
+     * string if not known.
+     */
     self.rain = function () {
       if (self.forecast &&
           self.forecast.rain &&
@@ -61,6 +115,17 @@ angular.module ('openWeatherMapApp')
       }
     };
 
+    /**
+     * @ngdoc method
+     * @name windSpeed
+     * @methodOf openWeatherMapApp.controller:ForecastDetailController
+     *
+     * @description
+     *  Returns the wind speed expected by a weather forecast.
+     *
+     * @returns {string} The wind speed forecast, or an empty string
+     * if not known.
+     */
     self.windSpeed = function () {
       if (self.forecast &&
           self.forecast.wind &&
@@ -71,6 +136,17 @@ angular.module ('openWeatherMapApp')
       }
     };
 
+    /**
+     * @ngdoc method
+     * @name windDirection
+     * @methodOf openWeatherMapApp.controller:ForecastDetailController
+     *
+     * @description
+     *  Returns the direction of wind expected by a weather forecast.
+     *
+     * @returns {string} The direction of wind forecast, or an empty
+     * string if not known.
+     */
     self.windDirection = function () {
       if (self.forecast &&
           self.forecast.wind &&
