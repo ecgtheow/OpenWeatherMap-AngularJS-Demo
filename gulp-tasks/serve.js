@@ -12,7 +12,10 @@ gulp.task ('browser-sync:dev', function (done) {
       port: config.serverPorts.bsDevelUi
     },
     server: {
-      baseDir: config.destDirs.build
+      baseDir: config.destDirs.build,
+      routes: {
+        '/docs': config.destDirs.docs
+      }
     },
     ghostMode: false,
     open: false,
@@ -49,7 +52,8 @@ function watcher (done) {
     config.appFiles.appJS
   ], {
     queue: true
-  }, gulp.series ('lint:app',
+  }, gulp.series ('docs',
+                  'lint:app',
                   'compile:app:devel',
                   'test:app',
                   function (done) {
@@ -105,7 +109,7 @@ function watcher (done) {
   done ();
 }
 
-gulp.task ('serve', gulp.series (//'docs',
+gulp.task ('serve', gulp.series ('docs',
                                  'compile:app:devel:all',
                                  'browser-sync:dev',
                                  watcher));
