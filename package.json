@@ -1,8 +1,8 @@
 {
   "name": "owmtest",
   "description": "OpenWeatherMap Test",
-  "private": true,
-  "license": "All Rights Reserved",
+  "private": false,
+  "license": "MIT",
   "version": "0.0.1",
   "scripts": {
     "test": "gulp test"
