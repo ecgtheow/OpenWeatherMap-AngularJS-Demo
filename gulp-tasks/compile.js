@@ -11,6 +11,7 @@ var sourcemapify = require ('sourcemapify');
 var source = require ('vinyl-source-stream');
 var buffer = require ('vinyl-buffer');
 var requireNew = require ('require-new');
+var merge = require ('merge2');
 
 var $ = require ('gulp-load-plugins') ({
   pattern: config.glpPattern
@@ -222,7 +223,32 @@ gulp.task ('compile:app:devel:all', gulp.series ('compile:app:devel:styles',
                                                  'compile:app:devel:vendor',
                                                  'compile:app:devel'));
 
-gulp.task ('compile:app:prod:all', gulp.series ('compile:app:prod:styles',
+gulp.task ('compile:app:prod:rev', function compileAppProdRev () {
+  var scripts = gulp.src (path.join (config.destDirs.distScripts, '*.js'), {
+    base: config.destDirs.dist
+  })
+    .pipe ($.rev ())
+    .pipe ($.revDeleteOriginal ())
+    .pipe (gulp.dest (config.destDirs.dist));
+
+  var styles = gulp.src (path.join (config.destDirs.distStyles, '*.css'), {
+    base: config.destDirs.dist
+  })
+    .pipe ($.rev ())
+    .pipe ($.revDeleteOriginal ())
+    .pipe (gulp.dest (config.destDirs.dist));
+
+  return merge ([
+    scripts,
+    styles
+  ], gulp.src (path.join (config.destDirs.dist, 'index.html')))
+    .pipe ($.revReplace ())
+    .pipe (gulp.dest (config.destDirs.dist));
+});
+
+gulp.task ('compile:app:prod:all', gulp.series ('clean:dist',
+                                                'compile:app:prod:styles',
                                                 'compile:app:prod:ieshims',
                                                 'compile:app:prod:vendor',
-                                                'compile:app:prod'));
+                                                'compile:app:prod',
+                                                'compile:app:prod:rev'));
